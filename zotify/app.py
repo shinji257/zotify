@@ -9,7 +9,7 @@ from zotify.loader import Loader
 from zotify.playlist import get_playlist_songs, get_playlist_info, download_from_user_playlist, download_playlist
 from zotify.podcast import download_episode, get_show_episodes
 from zotify.termoutput import Printer, PrintChannel
-from zotify.track import download_track, get_saved_tracks, get_followed_artists
+from zotify.track import download_track, get_saved_tracks, get_followed_artists, get_song_info
 from zotify.utils import splash, split_input, regex_input_for_urls
 from zotify.zotify import Zotify
 
@@ -104,6 +104,8 @@ def download_from_urls(urls: list[str]) -> bool:
             name, _ = get_playlist_info(playlist_id)
             enum = 1
             char_num = len(str(len(playlist_songs)))
+            track_paths = []
+
             for song in playlist_songs:
                 if not song[TRACK][NAME] or not song[TRACK][ID]:
                     Printer.print(PrintChannel.SKIPS, '###   SKIPPING:  SONG DOES NOT EXIST ANYMORE   ###' + "\n")
@@ -119,7 +121,17 @@ def download_from_urls(urls: list[str]) -> bool:
                             'playlist_id': playlist_id,
                             'playlist_track_id': song[TRACK][ID]
                         })
+
+                        (artists, raw_artists, album_name, song_name, image_url, release_year, disc_number,
+                            track_number, scraped_song_id, is_playable, duration_ms) = get_song_info(song[TRACK][ID])
+                        track_paths.append(f'A:/Spotify/{artists[0]}/{album_name}/{song_name}.ogg')
                     enum += 1
+            
+            with open(f'/home/bgeorgakas/Music/Playlists/{name}.m3u', "w", encoding="utf-8") as m3u_file:
+                m3u_file.write("#EXTM3U\n")  # Standard M3U header
+                for song in track_paths:
+                    m3u_file.write(f"{song}\n")
+
         elif episode_id is not None:
             download = True
             download_episode(episode_id)
@@ -129,7 +141,6 @@ def download_from_urls(urls: list[str]) -> bool:
                 download_episode(episode)
 
     return download
-
 
 def search(search_term):
     """ Searches download server's API for relevant data """
