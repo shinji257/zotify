@@ -130,7 +130,7 @@ def set_audio_tags(filename, artists, genres, name, album_name, release_year, di
     """ sets music_tag metadata """
     tags = music_tag.load_file(filename)
     tags[ALBUMARTIST] = artists[0]
-    tags[ARTIST] = conv_artist_format(artists)
+    tags[ARTIST] = artists[0]
     tags[GENRE] = genres[0] if not Zotify.CONFIG.get_all_genres() else Zotify.CONFIG.get_all_genres_delimiter().join(genres)
     tags[TRACKTITLE] = name
     tags[ALBUM] = album_name
