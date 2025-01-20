@@ -149,11 +149,10 @@ def set_music_thumbnail(filename, image_url) -> None:
     """ Downloads cover artwork, saves it as a JPEG, and embeds it into the music file's metadata """
 
     # Determine the new image filename with .jpg extension
-    image_filename = Path(filename).with_suffix('.jpg')
+    image_filename = Path(filename).parent.joinpath('cover.jpg')
 
     # Check if the image file already exists
     if not image_filename.exists():
-        # Download and save the image as a JPEG file
         img = requests.get(image_url).content
         with open(image_filename, 'wb') as img_file:
             img_file.write(img)
