@@ -146,10 +146,23 @@ def conv_artist_format(artists) -> str:
 
 
 def set_music_thumbnail(filename, image_url) -> None:
-    """ Downloads cover artwork """
-    img = requests.get(image_url).content
+    """ Downloads cover artwork, saves it as a JPEG, and embeds it into the music file's metadata """
+
+    # Determine the new image filename with .jpg extension
+    image_filename = Path(filename).with_suffix('.jpg')
+
+    # Check if the image file already exists
+    if not image_filename.exists():
+        # Download and save the image as a JPEG file
+        img = requests.get(image_url).content
+        with open(image_filename, 'wb') as img_file:
+            img_file.write(img)
+        print(f"Image saved as {image_filename}")
+
+    # Add the image to the music file's metadata
     tags = music_tag.load_file(filename)
-    tags[ARTWORK] = img
+    with open(image_filename, 'rb') as img_file:
+        tags['artwork'] = img_file.read()
     tags.save()
 
 
