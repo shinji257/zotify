@@ -1,6 +1,6 @@
 from librespot.audio.decoders import AudioQuality
 from tabulate import tabulate
-from pathlib import Path
+from pathlib import Path, PurePath
 
 from zotify.album import download_album, download_artist_albums
 from zotify.const import TRACK, NAME, ID, ARTIST, ARTISTS, ITEMS, TRACKS, EXPLICIT, ALBUM, ALBUMS, \
@@ -12,9 +12,13 @@ from zotify.termoutput import Printer, PrintChannel
 from zotify.track import download_track, get_saved_tracks, get_followed_artists, get_song_info
 from zotify.utils import splash, split_input, regex_input_for_urls
 from zotify.zotify import Zotify
+import os
 
 SEARCH_URL = 'https://api.spotify.com/v1/search'
 
+PLAYLIST_ROOT = 'A:/Songs'
+PLAYLIST_FOLDER = PurePath(Path.home() / Path('Music/Playlists'))
+Path(PLAYLIST_FOLDER).mkdir(exist_ok = True)
 
 def client(args) -> None:
     """ Connects to download server to perform query's and get songs to download """
@@ -124,10 +128,10 @@ def download_from_urls(urls: list[str]) -> bool:
 
                         (artists, raw_artists, album_name, song_name, image_url, release_year, disc_number,
                             track_number, scraped_song_id, is_playable, duration_ms) = get_song_info(song[TRACK][ID])
-                        track_paths.append(f'A:/Spotify/{artists[0]}/{album_name}/{song_name}.ogg')
+                        track_paths.append(f'{PLAYLIST_ROOT}/{artists[0]}/{album_name}/{song_name}.{Zotify.CONFIG.get_download_format()}')
                     enum += 1
             
-            with open('/home/bgeorgakas/Music/Playlists/{}.m3u'.format(name.replace('/', '')), "w", encoding="utf-8") as m3u_file:
+            with open('{}/{}.m3u'.format(PLAYLIST_FOLDER, name.replace('/', '')), "w", encoding="utf-8") as m3u_file:
                 m3u_file.write("#EXTM3U\n")  # Standard M3U header
                 for song in track_paths:
                     m3u_file.write(f"{song}\n")
