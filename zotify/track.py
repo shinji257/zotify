@@ -281,7 +281,10 @@ def download_track(mode: str, track_id: str, extra_keys=None, disable_progressba
                         add_to_directory_song_ids(filedir, scraped_song_id, PurePath(filename).name, artists[0], name)
 
                     if Zotify.CONFIG.get_bulk_wait_time():
-                        time.sleep(Zotify.CONFIG.get_bulk_wait_time())
+                        wait_time = Zotify.CONFIG.get_bulk_wait_time()
+                        Printer.print(PrintChannel.PROGRESS_INFO, f'Download successful. Waiting {wait_time} seconds.')
+                        time.sleep(wait_time)
+
         except Exception as e:
             Printer.print(PrintChannel.ERRORS, '###   SKIPPING: ' + song_name + ' (GENERAL DOWNLOAD ERROR)   ###')
             Printer.print(PrintChannel.ERRORS, 'Track_ID: ' + str(track_id))
