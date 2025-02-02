@@ -71,11 +71,11 @@ CONFIG_VALUES = {
     TEMP_DOWNLOAD_DIR:          { 'default': '',      'type': str,  'arg': '--temp-download-dir'          }
 }
 
-OUTPUT_DEFAULT_PLAYLIST_EXT = '{artist}/{album}/{song_name}.{ext}'
+OUTPUT_DEFAULT_PLAYLIST_EXT = '{artist}/{album}.{album_id}/{song_name}.{ext}'
 OUTPUT_DEFAULT_LIKED_SONGS = 'Liked Songs/{song_name}.{ext}'
-OUTPUT_DEFAULT_SINGLE = '{artist}/{album}/{song_name}.{ext}'
-OUTPUT_DEFAULT_ALBUM = '{artist}/{album}/{song_name}.{ext}'
-OUTPUT_DEFAULT_PLAYLIST = '{artist}/{album}/{song_name}.{ext}'
+OUTPUT_DEFAULT_SINGLE = '{artist}/{album}.{album_id}/{song_name}.{ext}'
+OUTPUT_DEFAULT_ALBUM = '{artist}/{album}.{album_id}/{song_name}.{ext}'
+OUTPUT_DEFAULT_PLAYLIST = '{artist}/{album}.{album_id}/{song_name}.{ext}'
 
 class Config:
     Values = {}
