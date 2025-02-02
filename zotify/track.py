@@ -297,7 +297,7 @@ def download_track(mode: str, track_id: str, extra_keys=None, disable_progressba
                 # Verifica se o nome da playlist foi fornecido
                 # Checks if playlist name is provided
                 if extra_keys and 'playlist' in extra_keys:
-                    playlist_file = PurePath(Zotify.CONFIG.get_root_path()).joinpath(extra_keys['playlist'] + '.m3u8')
+                    playlist_file = PurePath(Zotify.CONFIG.get_root_path()).joinpath(extra_keys['playlist'] + '.m3u')
 
                     # Se for o primeiro item da playlist, realiza o truncamento
                     # If it is the first item in the playlist, truncate it
