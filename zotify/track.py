@@ -60,6 +60,7 @@ def get_song_info(song_id) -> Tuple[List[str], List[Any], str, str, Any, Any, An
             artists.append(data[NAME])
 
         album_name = info[TRACKS][0][ALBUM][NAME]
+        album_id = info[TRACKS][0][ALBUM][ID]
         name = info[TRACKS][0][NAME]
         release_year = info[TRACKS][0][ALBUM][RELEASE_DATE].split('-')[0]
         disc_number = info[TRACKS][0][DISC_NUMBER]
@@ -74,7 +75,7 @@ def get_song_info(song_id) -> Tuple[List[str], List[Any], str, str, Any, Any, An
                 image = i
         image_url = image[URL]
 
-        return artists, info[TRACKS][0][ARTISTS], album_name, name, image_url, release_year, disc_number, track_number, scraped_song_id, is_playable, duration_ms
+        return artists, info[TRACKS][0][ARTISTS], album_name, album_id, name, image_url, release_year, disc_number, track_number, scraped_song_id, is_playable, duration_ms
     except Exception as e:
         raise ValueError(f'Failed to parse TRACKS_URL response: {str(e)}\n{raw}')
 
@@ -154,7 +155,7 @@ def download_track(mode: str, track_id: str, extra_keys=None, disable_progressba
     try:
         output_template = Zotify.CONFIG.get_output(mode)
 
-        (artists, raw_artists, album_name, name, image_url, release_year, disc_number,
+        (artists, raw_artists, album_name, album_id, name, image_url, release_year, disc_number,
          track_number, scraped_song_id, is_playable, duration_ms) = get_song_info(track_id)
 
         song_name = fix_filename(artists[0]) + ' - ' + fix_filename(name)
@@ -166,6 +167,7 @@ def download_track(mode: str, track_id: str, extra_keys=None, disable_progressba
 
         output_template = output_template.replace("{artist}", fix_filename(artists[0]))
         output_template = output_template.replace("{album}", fix_filename(album_name))
+        output_template = output_template.replace("{album_id}", fix_filename(album_id))
         output_template = output_template.replace("{song_name}", fix_filename(name))
         output_template = output_template.replace("{release_year}", fix_filename(release_year))
         output_template = output_template.replace("{disc_number}", fix_filename(disc_number))
