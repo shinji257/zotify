@@ -10,6 +10,8 @@ SKIP_EXISTING = 'SKIP_EXISTING'
 SKIP_PREVIOUSLY_DOWNLOADED = 'SKIP_PREVIOUSLY_DOWNLOADED'
 DOWNLOAD_FORMAT = 'DOWNLOAD_FORMAT'
 BULK_WAIT_TIME = 'BULK_WAIT_TIME'
+PL_BULK_WAIT_TIME = 'PL_BULK_WAIT_TIME'
+PL_BATCH = 'PL_BATCH'
 OVERRIDE_AUTO_WAIT = 'OVERRIDE_AUTO_WAIT'
 CHUNK_SIZE = 'CHUNK_SIZE'
 SPLIT_ALBUM_DISCS = 'SPLIT_ALBUM_DISCS'
@@ -56,6 +58,8 @@ CONFIG_VALUES = {
     SKIP_PREVIOUSLY_DOWNLOADED: { 'default': 'False', 'type': bool, 'arg': '--skip-previously-downloaded' },
     RETRY_ATTEMPTS:             { 'default': '1',     'type': int,  'arg': '--retry-attempts'             },
     BULK_WAIT_TIME:             { 'default': '1',     'type': int,  'arg': '--bulk-wait-time'             },
+    PL_BULK_WAIT_TIME:          { 'default': '1',     'type': int,  'arg': '--pl-bulk-wait-time'          },
+    PL_BATCH:                   { 'default': '0',     'type': int,  'arg': '--pl-batch'                   },
     OVERRIDE_AUTO_WAIT:         { 'default': 'False', 'type': bool, 'arg': '--override-auto-wait'         },
     CHUNK_SIZE:                 { 'default': '20000', 'type': int,  'arg': '--chunk-size'                 },
     DOWNLOAD_REAL_TIME:         { 'default': 'False', 'type': bool, 'arg': '--download-real-time'         },
@@ -199,6 +203,14 @@ class Config:
     @classmethod
     def get_bulk_wait_time(cls) -> int:
         return cls.get(BULK_WAIT_TIME)
+
+    @classmethod
+    def get_pl_bulk_wait_time(cls) -> int:
+        return cls.get(PL_BULK_WAIT_TIME)
+
+    @classmethod
+    def get_pl_batch(cls) -> int:
+        return cls.get(PL_BATCH)
 
     @classmethod
     def get_language(cls) -> str:
