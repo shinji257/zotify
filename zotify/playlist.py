@@ -53,7 +53,7 @@ def download_playlist(playlist):
     playlist_songs = [song for song in get_playlist_songs(playlist[ID]) if song[TRACK] is not None and song[TRACK][ID]]
     p_bar = Printer.progress(playlist_songs, unit='song', total=len(playlist_songs), unit_scale=True)
     enum = 1
-    plimit = 1
+    plimit = -1
     pl_batch = Zotify.CONFIG.get_pl_batch()
     for song in p_bar:
         download_track('extplaylist', song[TRACK][ID], extra_keys={'playlist': playlist[NAME], 'playlist_num': str(enum).zfill(2)}, disable_progressbar=True)
@@ -66,7 +66,7 @@ def download_playlist(playlist):
                     pl_wait_time = Zotify.CONFIG.get_pl_bulk_wait_time()
                     Printer.print(PrintChannel.PROGRESS_INFO, f'Pausing after {pl_batch} song queries in playlist. Waiting {pl_wait_time} seconds.')
                     time.sleep(pl_wait_time)
-                plimit = 1
+                plimit = -1
 
 
 def download_from_user_playlist():
