@@ -77,8 +77,8 @@ CONFIG_VALUES = {
 
 OUTPUT_DEFAULT_PLAYLIST_EXT = '{album}.{album_id}/{track_number} {song_name}.{ext}'
 OUTPUT_DEFAULT_LIKED_SONGS = 'Liked Songs/{song_name}.{ext}'
-OUTPUT_DEFAULT_SINGLE = '{artist}/{album}.{album_id}/{track_number} {song_name}.{ext}'
-OUTPUT_DEFAULT_ALBUM = '{artist}/{album}.{album_id}/{track_number} {song_name}.{ext}'
+OUTPUT_DEFAULT_SINGLE = '{album}.{album_id}/{track_number} {song_name}.{ext}'
+OUTPUT_DEFAULT_ALBUM = '{album}.{album_id}/{track_number} {song_name}.{ext}'
 OUTPUT_DEFAULT_PLAYLIST = '{album} {album_id}/{track_number} {song_name}.{ext}'
 
 class Config:
