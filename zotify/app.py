@@ -16,9 +16,9 @@ import os
 
 SEARCH_URL = 'https://api.spotify.com/v1/search'
 
-PLAYLIST_ROOT = 'A:/Songs'
-PLAYLIST_FOLDER = PurePath(Path.home() / Path('Music/Playlists'))
-Path(PLAYLIST_FOLDER).mkdir(exist_ok = True)
+# PLAYLIST_ROOT = 'A:/Songs'
+# PLAYLIST_FOLDER = PurePath(Path.home() / Path('Music/Playlists'))
+# Path(PLAYLIST_FOLDER).mkdir(exist_ok = True)
 
 def client(args) -> None:
     """ Connects to download server to perform query's and get songs to download """
@@ -131,10 +131,10 @@ def download_from_urls(urls: list[str]) -> bool:
                         track_paths.append(f'{PLAYLIST_ROOT}/{artists[0]}/{album_name}/{song_name}.{Zotify.CONFIG.get_download_format()}')
                     enum += 1
             
-            with open('{}/{}.m3u'.format(PLAYLIST_FOLDER, name.replace('/', '')), "w", encoding="utf-8") as m3u_file:
-                m3u_file.write("#EXTM3U\n")  # Standard M3U header
-                for song in track_paths:
-                    m3u_file.write(f"{song}\n")
+            # with open('{}/{}.m3u'.format(PLAYLIST_FOLDER, name.replace('/', '')), "w", encoding="utf-8") as m3u_file:
+            #     m3u_file.write("#EXTM3U\n")  # Standard M3U header
+            #     for song in track_paths:
+            #         m3u_file.write(f"{song}\n")
 
         elif episode_id is not None:
             download = True
