@@ -291,28 +291,33 @@ class Config:
             return v
         if mode == 'playlist':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_PLAYLIST).parent
-                return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
+                path = PurePath(OUTPUT_DEFAULT_PLAYLIST).parent
+                file = PurePath(OUTPUT_DEFAULT_PLAYLIST).name
+                return str(PurePath(path).joinpath('Disc {disc_number}').joinpath(file))
             return OUTPUT_DEFAULT_PLAYLIST
         if mode == 'extplaylist':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_PLAYLIST_EXT).parent
-                return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
+                path = PurePath(OUTPUT_DEFAULT_PLAYLIST_EXT).parent
+                file = PurePath(OUTPUT_DEFAULT_PLAYLIST_EXT).name
+                return str(PurePath(path).joinpath('Disc {disc_number}').joinpath(file))
             return OUTPUT_DEFAULT_PLAYLIST_EXT
         if mode == 'liked':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_LIKED_SONGS).parent
-                return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
+                path = PurePath(OUTPUT_DEFAULT_LIKED_SONGS).parent
+                file = PurePath(OUTPUT_DEFAULT_LIKED_SONGS).name
+                return str(PurePath(path).joinpath('Disc {disc_number}').joinpath(file))
             return OUTPUT_DEFAULT_LIKED_SONGS
         if mode == 'single':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_SINGLE).parent
-                return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
+                path = PurePath(OUTPUT_DEFAULT_SINGLE).parent
+                file = PurePath(OUTPUT_DEFAULT_SINGLE).name
+                return str(PurePath(path).joinpath('Disc {disc_number}').joinpath(file))
             return OUTPUT_DEFAULT_SINGLE
         if mode == 'album':
             if cls.get_split_album_discs():
-                split = PurePath(OUTPUT_DEFAULT_ALBUM).parent
-                return PurePath(split).joinpath('Disc {disc_number}').joinpath(split)
+                path = PurePath(OUTPUT_DEFAULT_ALBUM).parent
+                file = PurePath(OUTPUT_DEFAULT_ALBUM).name
+                return str(PurePath(path).joinpath('Disc {disc_number}').joinpath(file))
             return OUTPUT_DEFAULT_ALBUM
         raise ValueError()
 
