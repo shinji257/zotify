@@ -128,7 +128,7 @@ def download_from_urls(urls: list[str]) -> bool:
 
                         (artists, raw_artists, album_name, song_name, image_url, release_year, disc_number,
                             track_number, scraped_song_id, is_playable, duration_ms) = get_song_info(song[TRACK][ID])
-                        track_paths.append(f'{PLAYLIST_ROOT}/{artists[0]}/{album_name}/{song_name}.{Zotify.CONFIG.get_download_format()}')
+                        # track_paths.append(f'{PLAYLIST_ROOT}/{artists[0]}/{album_name}/{song_name}.{Zotify.CONFIG.get_download_format()}')
                     enum += 1
             
             # with open('{}/{}.m3u'.format(PLAYLIST_FOLDER, name.replace('/', '')), "w", encoding="utf-8") as m3u_file:
