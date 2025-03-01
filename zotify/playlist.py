@@ -68,7 +68,7 @@ def download_playlist(playlist):
                     pl_wait_time = Zotify.CONFIG.get_pl_bulk_wait_time()
                     Printer.print(PrintChannel.PROGRESS_INFO, f'Pausing after {pl_batch} song queries in playlist. Waiting {pl_wait_time} seconds.')
                     time.sleep(pl_wait_time)
-                pause = 1
+                plimit = 1
 
 
 def download_from_user_playlist():
