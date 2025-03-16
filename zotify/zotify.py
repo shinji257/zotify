@@ -64,7 +64,8 @@ class Zotify:
             'Authorization': f'Bearer {cls.__get_auth_token()}',
             'Accept-Language': f'{cls.CONFIG.get_language()}',
             'Accept': 'application/json',
-            'app-platform': 'WebPlayer'
+            'app-platform': 'WebPlayer',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0'
         }
 
     @classmethod
@@ -73,7 +74,8 @@ class Zotify:
             'Authorization': f'Bearer {cls.__get_auth_token()}',
             'Accept-Language': f'{cls.CONFIG.get_language()}',
             'Accept': 'application/json',
-            'app-platform': 'WebPlayer'
+            'app-platform': 'WebPlayer',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.0'
         }, {LIMIT: limit, OFFSET: offset}
 
     @classmethod
